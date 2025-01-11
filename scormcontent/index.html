@@ -107,12 +107,28 @@
 
 
         function __resolveJsonp(id, data) {
-          const resolve = jsonp[id]
-          if (typeof resolve !== 'function') {
-            throw new Error(`Could not load JSONP "${id}"`)
+          // Check if the jsonp object exists and is valid
+          if (typeof jsonp !== 'object' || jsonp === null) {
+            throw new Error(`JSONP object is not initialized.`);
           }
-          resolve(data)
+        
+          // Get the resolve function for the given id
+          const resolve = jsonp[id];
+        
+          // Check if the resolve function exists and is a valid function
+          if (typeof resolve !== 'function') {
+            throw new Error(`Could not resolve JSONP for ID "${id}".`);
+          }
+        
+          // Call the resolve function with the provided data
+          try {
+            resolve(data);
+          } catch (error) {
+            console.error(`Error executing JSONP callback for ID "${id}":`, error);
+            throw error; // Re-throw the error for further handling
+          }
         }
+
 
         async function __fetchCourse(name) {
           name = name == null ? window.i18n.default : name
