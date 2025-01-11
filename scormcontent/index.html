@@ -82,23 +82,29 @@
           return loadModule(manifest[name])
         }
         
+       
+
         async function __loadJsonp(id, path) {
           try {
-            return await new Promise((resolve, reject) => {
-              try {
-                jsonp[id] = resolve
-                const script = document.createElement('script')
-                script.onerror = reject
-                script.src = `./${path}`
-                document.head.appendChild(script)
-              } catch (err) {
-                reject(err)
-              }
-            })
+              return await new Promise((resolve, reject) => {
+                  try {
+                      jsonp[id] = resolve;
+                      const script = document.createElement("script");
+                      script.onerror = (error) => {
+                          console.error(`Failed to load JSONP file: ${path}`, error);
+                          reject(error);
+                      };
+                      script.src = `./${path}`;
+                      document.head.appendChild(script);
+                  } catch (err) {
+                      reject(err);
+                  }
+              });
           } finally {
-            delete jsonp[id]
+              delete jsonp[id];
           }
-        }
+      }
+
 
         function __resolveJsonp(id, data) {
           const resolve = jsonp[id]
