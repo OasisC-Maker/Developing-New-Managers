@@ -21,14 +21,12 @@
     <![endif]-->
 
     <script id="__ENTRY__" type="application/json">
-      {".js":["rise/698d2c12.js"]}
+      {".js":["https://oasisc-maker.github.io/Developing-New-Managers/scormcontent/lib/rise/698d2c12.js"]}
     </script>
-    
- <!--[if lt IE 9]>
+  
     <script id="__REMOTE_ENTRIES__" type="application/json">
-      {"mondrian":{".js":["mondrian/entry.js"]}}
+      {"mondrian":{".js":["https://oasisc-maker.github.io/Developing-New-Managers/scormcontent/lib/mondrian/entry.js"]}}
     </script>
- <![endif]-->
     
     <script>
       (function() {
@@ -56,7 +54,7 @@
                 var script = document.createElement('script')
                 script.onload = resolve
                 script.onerror = reject
-                script.src = 'lib/' + manifest['.js'][idx]
+                script.src = manifest['.js'][idx]
                 document.body.appendChild(script)
               }))
             }
@@ -94,7 +92,7 @@
                           console.error(`Failed to load JSONP file: ${path}`, error);
                           reject(error);
                       };
-                      script.src = `./${path}`;
+                      script.src = `https://oasisc-maker.github.io/Developing-New-Managers/scormcontent/${path}`;
                       document.head.appendChild(script);
                   } catch (err) {
                       reject(err);
@@ -614,8 +612,7 @@ root.Runtime = {
 
   }(window));
 </script>
-    <script src="https://oasisc-maker.github.io/Developing-New-Managers/scormcontent/lib/mondrian/entry.js"></script>
-<script src="https://oasisc-maker.github.io/Developing-New-Managers/scormcontent/lib/rise/698d2c12.js"></script>
+    <script>__loadEntry()</script>
     
     
     
